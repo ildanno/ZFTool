@@ -204,7 +204,6 @@ class VerboseConsoleTest extends \PHPUnit_Framework_TestCase
             '       )'                                 . PHP_EOL .
             '       ---------------------------------' . PHP_EOL, ob_get_clean()
         );
-        ob_start();
     }
 
     public function testSummaryAllSuccessful()
