@@ -112,7 +112,8 @@ class CreateController extends AbstractActionController
         }
 
         $ucName     = ucfirst($name);
-        $ctrlPath   = $path . '/module/' . $module . '/src/' . $module . '/Controller/' . $ucName.'Controller.php';
+        $ctrlDir    = $path . '/module/' . $module . '/src/' . $module . '/Controller/';
+        $ctrlPath   = $ctrlDir . $ucName.'Controller.php';
         $controller = $ucName . 'Controller';
 
         $code = new Generator\ClassGenerator();
@@ -149,6 +150,10 @@ class CreateController extends AbstractActionController
         $phtmlPath = $dir . "/index.phtml";
         if (file_put_contents($phtmlPath, 'Action "index", controller "'.$ucName.'", module "'.$module.'".')) {
             $phtml = true;
+        }
+
+        if (!file_exists($ctrlDir)) {
+            mkdir($ctrlDir, 0777, true);
         }
 
         if (file_put_contents($ctrlPath, $file->generate()) && $phtml == true) {
